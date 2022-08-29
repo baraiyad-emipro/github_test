@@ -13,4 +13,4 @@ class PartnerDemo(models.Model):
     email = fields.Char(string='Email')
     phone_no = fields.Char(string='Phone No')
     gender = fields.Selection(selection=[('Male', 'Male'), ('Female', 'Female'), ('Transgender', 'Transgender')])
-    last_name = fields.Char(string='Last Name', help='Last Name Of The Partner New New.')
+    last_name = fields.Char(string='Last Name', help='Last Name Of The Partner New New Test Demo.')
