@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="partner_demo1_data1" model="res.partner.demo1">
+            <field name="name">Rajan</field>
+            <field name="email">Rajan@gmail.com</field>
+            <field name="phone_no">8854215464</field>
+            <field name="gender">Male</field>
+        </record>
+        <record id="partner_demo1_data2" model="res.partner.demo1">
+            <field name="name">Sayam</field>
+            <field name="email">sayam@gmail.com</field>
+            <field name="phone_no">9605041096</field>
+            <field name="gender">Male</field>
+        </record>
+        <record id="partner_demo1_data3" model="res.partner.demo1">
+            <field name="name">Shivangi</field>
+            <field name="email">shivangi@gmail.com</field>
+            <field name="phone_no">8847516633</field>
+            <field name="gender">Female</field>
+        </record>
+        <record id="partner_demo1_data4" model="res.partner.demo1">
+            <field name="name">kajal</field>
+            <field name="email">kajal@gmail.com</field>
+            <field name="phone_no">8844751215</field>
+            <field name="gender">Female</field>
+        </record>
+        <record id="partner_demo1_data5" model="res.partner.demo1">
+            <field name="name">Jinal</field>
+            <field name="email">jinal@gmail.com</field>
+            <field name="phone_no">6325481244</field>
+            <field name="gender">Female</field>
+        </record>
+    </data>
+</odoo>
