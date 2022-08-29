@@ -68,4 +68,22 @@
     <menuitem id="manu_partner_demo1_sub1" name="Partner Details" parent="manu_partner_demo1_root"/>
     <menuitem id="manu_partner_demo1_sub2" name="Partner" parent="manu_partner_demo1_sub1"
               action="action_res_partner_demo"/>
+
+    odoo.define('learning_odoo_web.button_click', function (require) {
+        "use strict";
+        var ajax = require('web.ajax');
+        const publicWidget = require('web.public.widget');
+        publicWidget.registry.product_data = publicWidget.Widget.extend({
+        selector: '.product_div',
+        events: {
+            'click .product_data': 'onClickShowProduct',
+        },
+        onClickShowProduct: function () {
+            ajax.jsonRpc('/product_data', 'call', {}).then(
+            function (data) {
+                document.getElementById("product").innerHTML = data;
+            });
+        },
+
+    });
 </odoo>
