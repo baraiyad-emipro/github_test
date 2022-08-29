@@ -31,5 +31,11 @@
             <field name="phone_no">6325481244</field>
             <field name="gender">Female</field>
         </record>
+        <record id="partner_demo1_data6" model="res.partner.demo1">
+            <field name="name">Jannak</field>
+            <field name="email">Jannak@gmail.com</field>
+            <field name="phone_no">6324481244</field>
+            <field name="gender">Male</field>
+        </record>
     </data>
 </odoo>
