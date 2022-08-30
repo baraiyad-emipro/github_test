@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_page" name="Custom Page">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 pb56 pt56">
+                            <center>
+                                <div class="product_div">
+                                    <button class="product_data btn btn-primary">Click To Show Products!</button>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                    <div id="product_data_show">
+
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="product_data">
+        <div class="container">
+            <br/>
+            <div class="row my-5" style="border: 2px solid powderblue; border-radius: 6px;">
+                <div class="col-4 mx-3 my-3">
+                    <img t-attf-src="/web/image/product.template/#{product.id}/image_512" width="300"/>
+                </div>
+                <div class="col-6 mx-2 my-3">
+                    <strong>Name:</strong>
+                    <h3 t-esc="product.name"/>
+                    <br/>
+                    <strong>Price:</strong>
+                    <h5 t-esc="product.list_price"/>
+                    <br/>
+                    <strong>Category:</strong>
+                    <p t-esc="product.categ_id.name"/>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
+
+
+@http.route(['/custom_page'], type='http', auth="public", website=True)
+    def custom_page(self):
+        return request.render('learning_odoo_web.custom_page')
+
+    @http.route('/product_data', type="json", auth="public", website=True)
+    def product_data(self):
+        # print('Hello Test Demo')
+        product = http.request.env['product.template'].search([('website_published', '=', True)], limit=1)
+        response = http.Response(template="learning_odoo_web.product_data", qcontext={'product': product})
+        return response.render()
+
+
+@http.route([
+        '''/shop''',
+        '''/shop/page/<int:page>''',
+        '''/shop/category/<model("product.public.category"):category>''',
+        '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
+    ], type='http', auth="public", website=True)
+    def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
+        res = super(WebsiteSaleInherit, self).shop(page=0, category=None, search='', min_price=0.0, max_price=0.0,
+                                                   ppg=False, **post)
+        print('Hello Test Inherit Is Done or not ')
+        return res
+
+
+
+
+
+
+
+odoo.define('learning_odoo_web.button_click', function (require) {
+        "use strict";
+//        console.log("test")
+        var ajax = require('web.ajax');
+        const publicWidget = require('web.public.widget');
+        publicWidget.registry.product_data = publicWidget.Widget.extend({
+        selector: '.product_div',
+        events: {
+            'click .product_data': 'onClickShowProduct',
+        },
+        onClickShowProduct: function () {
+            ajax.jsonRpc('/product_data', 'call', {}).then(
+            function (data) {
+//                alert(data)
+//                alert('Hello')
+                $('#product_data_show').html(data);
+//                document.getElementById("product_data_show").innerHTML = data;
+            });
+        },
+
+    });
